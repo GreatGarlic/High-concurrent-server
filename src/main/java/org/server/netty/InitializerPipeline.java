@@ -1,0 +1,44 @@
+/****************************************************************
+ *文件名: 类名.java <br>
+ *版本: <br>
+ *描述: 相关描述<br>
+ *版权所有: <br>
+ *创建者: 刘源 <br>
+ *创建日期: 2014年7月4日 <br>
+ *修改者: 刘源<br>
+ *修改日期: 2014年7月4日<br>
+ *修改说明: 修改说明<br>
+ ****************************************************************/
+
+package org.server.netty;
+
+import io.netty.channel.ChannelInitializer;
+import io.netty.channel.ChannelPipeline;
+import io.netty.channel.socket.SocketChannel;
+import io.netty.util.concurrent.DefaultEventExecutor;
+import io.netty.util.concurrent.EventExecutor;
+
+import org.server.netty.codec.MessageDecoder;
+import org.server.netty.codec.MessageEncoder;
+import org.server.netty.handler.CommonHandler;
+
+/**
+ *装载Netty处理链路.
+ * @author 刘源
+ */
+
+public class InitializerPipeline extends ChannelInitializer<SocketChannel> {
+
+	public InitializerPipeline() {
+
+	}
+
+	@Override
+	protected void initChannel(SocketChannel ch) throws Exception {
+		ChannelPipeline pipeline = ch.pipeline();
+		EventExecutor e1 = new DefaultEventExecutor();
+		pipeline.addLast("decoder", new MessageDecoder());
+		pipeline.addLast("encoder", new MessageEncoder());
+		pipeline.addLast(e1, "handler", new CommonHandler());
+	}
+}
