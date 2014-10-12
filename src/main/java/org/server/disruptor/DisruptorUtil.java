@@ -3,7 +3,6 @@ package org.server.disruptor;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-import org.junit.Test;
 import org.server.disruptor.model.PublishMessageEntity;
 
 import com.lmax.disruptor.RingBuffer;
