@@ -46,7 +46,7 @@
 		</dependency>
 	</dependencies>
 	<build>
-	<!--解决由于依赖拷贝插件与Maven插件不同导致的不兼容的问题 -->
+		<!--解决由于依赖拷贝插件与Maven插件不同导致的不兼容的问题 -->
 		<pluginManagement>
 			<plugins>
 				<!-- Ignore/Execute plugin execution -->
