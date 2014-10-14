@@ -15,8 +15,6 @@ package org.server.netty;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
-import io.netty.util.concurrent.DefaultEventExecutor;
-import io.netty.util.concurrent.EventExecutor;
 
 import org.server.netty.codec.MessageDecoder;
 import org.server.netty.codec.MessageEncoder;
@@ -36,9 +34,8 @@ public class InitializerPipeline extends ChannelInitializer<SocketChannel> {
 	@Override
 	protected void initChannel(SocketChannel ch) throws Exception {
 		ChannelPipeline pipeline = ch.pipeline();
-		EventExecutor e1 = new DefaultEventExecutor();
 		pipeline.addLast("decoder", new MessageDecoder());
 		pipeline.addLast("encoder", new MessageEncoder());
-		pipeline.addLast(e1, "handler", new CommonHandler());
+		pipeline.addLast( "handler", new CommonHandler());
 	}
 }

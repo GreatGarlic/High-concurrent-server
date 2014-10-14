@@ -40,9 +40,9 @@ public class DisruptorEventHandle implements EventHandler<ValueEvent> {
 	 */
 	@Override
 	public void onEvent(ValueEvent event, long sequence, boolean endOfBatch) {
-		LOGGER.debug("消费者开始消费");
 		try {
 			ChannelHandlerContext ctx = event.getEntity().getCtx();
+			LOGGER.debug("消费者开始消费ID:"+ctx.channel().id().asLongText());
 			Object msg =  event.getEntity().getMsg();
 			ctx.writeAndFlush(msg);
 		} catch (Exception e) {

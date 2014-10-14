@@ -33,7 +33,7 @@ public class DisruptorUtil {
 	static {
 		Executor executor = Executors.newCachedThreadPool();
 		Disruptor<ValueEvent> disruptor = new Disruptor<ValueEvent>(ValueEvent.EVENT_FACTORY, BUFFER_SIZE, executor,
-				ProducerType.SINGLE, new YieldingWaitStrategy());
+				ProducerType.MULTI, new YieldingWaitStrategy());
 		disruptor.handleEventsWith(new DisruptorEventHandle());
 		disruptor.start();
 		ringBuffer = disruptor.getRingBuffer();
