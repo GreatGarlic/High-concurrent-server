@@ -39,7 +39,9 @@ public class CommonHandler extends ChannelHandlerAdapter {
 	public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
 		PublishMessageEntity entity = new PublishMessageEntity(ctx, msg);
 		//向Disruptor中发布消息
-		DisruptorUtil.publish(entity);
+		//DisruptorUtil.publish(entity);
+
+        ctx.writeAndFlush(msg);
 	}
 
 	@Override

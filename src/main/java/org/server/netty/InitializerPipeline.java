@@ -19,6 +19,8 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.handler.traffic.ChannelTrafficShapingHandler;
 import io.netty.handler.traffic.GlobalTrafficShapingHandler;
 import io.netty.util.HashedWheelTimer;
+import io.netty.util.concurrent.DefaultEventExecutorGroup;
+import io.netty.util.concurrent.EventExecutorGroup;
 import org.server.netty.codec.MessageDecoder;
 import org.server.netty.codec.MessageEncoder;
 import org.server.netty.handler.ChannelTrafficCounterHandler;
@@ -37,9 +39,11 @@ import java.util.concurrent.ScheduledExecutorService;
 
 public class InitializerPipeline extends ChannelInitializer<SocketChannel> {
     private GlobalTrafficCounterHandler counter;
+    private EventExecutorGroup eventExecutorGroup;
 	public InitializerPipeline() {
         ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
         counter = new GlobalTrafficCounterHandler(executor, 1000);
+        eventExecutorGroup = new DefaultEventExecutorGroup(32);
 	}
 
 	@Override
