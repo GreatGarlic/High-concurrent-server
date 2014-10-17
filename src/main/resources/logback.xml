@@ -118,10 +118,10 @@
         <appender-ref ref="CODEC" />
     </appender>
 	<root level="DEBUG">
-		 <appender-ref ref="ASYNCFILE" />
-		 <appender-ref ref="ASYNCCONSOLE" />
-		 <appender-ref ref="ASYNCERRORFILE" />
-		 <appender-ref ref="ASYNCCODEC" />
+		 <appender-ref ref="FILE" />
+		 <appender-ref ref="CONSOLE" />
+		 <appender-ref ref="ERRORFILE" />
+		 <appender-ref ref="CODEC" />
 	</root>
 
 </configuration>  

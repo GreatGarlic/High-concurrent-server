@@ -5,6 +5,8 @@ import io.netty.buffer.ByteBufUtil;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToByteEncoder;
 
+import org.server.disruptor.DisruptorUtil;
+import org.server.disruptor.model.PublishMessageEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -39,7 +41,9 @@ public class MessageEncoder extends MessageToByteEncoder<Object> {
 	 */
 	@Override
 	protected void encode(ChannelHandlerContext ctx, Object msg, ByteBuf out)  {
-		LOGGER.info(String.format("[%s]发送出的报文:[%s]", ctx.channel().id().asLongText(), ByteBufUtil.hexDump((byte[]) msg)));
+		//LOGGER.info(String.format("[%s]发送出的报文:[%s]", ctx.channel().id().asLongText(), ByteBufUtil.hexDump((byte[]) msg)));
+        PublishMessageEntity log = new PublishMessageEntity(ctx, String.format("[%s]发送出的报文:[%s]", ctx.channel().id().asLongText(), ByteBufUtil.hexDump((byte[])msg)));
+        DisruptorUtil.publish(log);
 		out.writeBytes((byte[]) msg);
 	}
 }

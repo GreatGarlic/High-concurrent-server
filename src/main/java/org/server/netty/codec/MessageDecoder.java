@@ -7,6 +7,8 @@ import io.netty.handler.codec.ByteToMessageDecoder;
 
 import java.util.List;
 
+import org.server.disruptor.DisruptorUtil;
+import org.server.disruptor.model.PublishMessageEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,7 +33,10 @@ public class MessageDecoder extends ByteToMessageDecoder {
 		if (!buff.isReadable()) {
 			return;
 		}
-		LOGGER.info(String.format("[%s]收到的的报文:[%s]", ctx.channel().id().asLongText(), ByteBufUtil.hexDump(buff)));
+		//LOGGER.info(String.format("[%s]收到的的报文:[%s]", ctx.channel().id().asLongText(), ByteBufUtil.hexDump(buff)));
+        PublishMessageEntity log = new PublishMessageEntity(ctx, String.format("[%s]收到的的报文:[%s]", ctx.channel().id().asLongText(), ByteBufUtil.hexDump(buff)));
+        DisruptorUtil.publish(log);
+
 		byte[] ss = new byte[buff.readableBytes()];
 		buff.readBytes(ss);
 		objs.add(ss);
