@@ -8,15 +8,11 @@
 			<pattern>%d-%c-%t-%5p: %m%n</pattern>
 		</encoder>
 	</appender>
-
 	<appender name="FILE"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<Append>true</Append>
 		<File>log/all.log</File>
+		<Append>true</Append>
 		<Encoding>UTF-8</Encoding>
-		<encoder>
-			<pattern>%d-%c-%t-%5p: %m%n</pattern>
-		</encoder>
 		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
 			<level>ALL</level>
 		</filter>
@@ -28,8 +24,10 @@
 				<maxFileSize>32MB</maxFileSize>
 			</timeBasedFileNamingAndTriggeringPolicy>
 		</rollingPolicy>
+		<encoder>
+			<pattern>%d-%c-%t-%5p: %m%n</pattern>
+		</encoder>
 	</appender>
-
 	<appender name="ERRORFILE"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<Append>true</Append>
@@ -85,44 +83,45 @@
 	<logger name="org.server.netty.codec" level="INFO">
 		<appender-ref ref="CODEC" />
 	</logger>
-    <!--异步输出 -->
-<!-- 	<appender name="ASYNCFILE" class="ch.qos.logback.classic.AsyncAppender"> -->
-<!-- 		<queueSize>500</queueSize> -->
-<!-- 		<discardingThreshold>0</discardingThreshold> -->
-<!-- 		<appender-ref ref="FILE" /> -->
-<!-- 	</appender> -->
-<!-- 	<appender name="ASYNCCONSOLE" class="ch.qos.logback.classic.AsyncAppender"> -->
-<!--         <queueSize>500</queueSize> -->
-<!--         <discardingThreshold>0</discardingThreshold> -->
-<!--         <appender-ref ref="CONSOLE" /> -->
-<!-- 	</appender> -->
-<!-- 	<appender name="ASYNCERRORFILE" class="ch.qos.logback.classic.AsyncAppender"> -->
-<!--         <queueSize>500</queueSize> -->
-<!--         <discardingThreshold>0</discardingThreshold> -->
-<!--         <appender-ref ref="ERRORFILE" /> -->
-<!--     </appender> -->
-<!--     <appender name="ASYNCCODEC" class="ch.qos.logback.classic.AsyncAppender"> -->
-<!--         <queueSize>500</queueSize> -->
-<!--         <discardingThreshold>0</discardingThreshold> -->
-<!--         <appender-ref ref="CODEC" /> -->
-<!--     </appender> -->
-   
-
-  <appender name="SYSLOG" class="ch.qos.logback.classic.net.SyslogAppender">
-    <syslogHost>192.168.26.23</syslogHost>
-    <port>2563</port>
-    <facility>AUTH</facility>
-    <suffixPattern>[%thread] %logger %msg</suffixPattern>
-  </appender>
+	<!--异步输出 -->
+	<!-- <appender name="ASYNCCONSOLE" class="org.server.log.appender.DisruptorLogAppender"> -->
+	<!-- <queueSize>1024</queueSize> -->
+	<!-- <discardingThreshold>0</discardingThreshold> -->
+	<!-- <appender-ref ref="CONSOLE" /> -->
+	<!-- </appender> -->
+	<appender name="ASYNCFILE" class="org.server.log.appender.DisruptorLogAppender">
+		<queueSize>1024</queueSize>
+		<discardingThreshold>0</discardingThreshold>
+		<appender-ref ref="FILE" />
+	</appender>
+	<!-- <appender name="ASYNCERRORFILE" class="org.server.log.appender.DisruptorLogAppender"> -->
+	<!-- <queueSize>1024</queueSize> -->
+	<!-- <discardingThreshold>0</discardingThreshold> -->
+	<!-- <appender-ref ref="ERRORFILE" /> -->
+	<!-- </appender> -->
+	<!-- <appender name="ASYNCCODEC" class="org.server.log.appender.DisruptorLogAppender"> -->
+	<!-- <queueSize>1024</queueSize> -->
+	<!-- <discardingThreshold>0</discardingThreshold> -->
+	<!-- <appender-ref ref="CODEC" /> -->
+	<!-- </appender> -->
+	<!--UDP日志传输 -->
+	<!-- <appender name="SYSLOG" class="ch.qos.logback.classic.net.SyslogAppender"> -->
+	<!-- <syslogHost>192.168.26.23</syslogHost> -->
+	<!-- <port>2563</port> -->
+	<!-- <facility>AUTH</facility> -->
+	<!-- <suffixPattern>[%thread] %logger %msg</suffixPattern> -->
+	<!-- </appender> -->
 
 
 
 	<root level="DEBUG">
-	     <appender-ref ref="SYSLOG" />
-		 <appender-ref ref="FILE" />
-		 <appender-ref ref="CONSOLE" />
-		 <appender-ref ref="ERRORFILE" />
-		 <appender-ref ref="CODEC" />
+		<!-- <appender-ref ref="ASYNCCONSOLE" /> -->
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="ASYNCFILE" />
+		<!-- <appender-ref ref="ASYNCERRORFILE" /> -->
+		<appender-ref ref="ERRORFILE" />
+		<!-- <appender-ref ref="ASYNCCODEC" /> -->
+		<appender-ref ref="CODEC" />
 	</root>
 
 </configuration>  
