@@ -30,7 +30,8 @@ public class LogDisruptorEventHandle implements EventHandler<LogValueEvent> {
 	 */
 	@Override
 	public void onEvent(LogValueEvent event, long sequence, boolean endOfBatch) {
-			event.getEntity().getParent().appendLoopOnAppenders(event.getEntity().getEventObject());
+		event.getParent().appendLoopOnAppenders(event.getEventObject());
+		
 	}
 
 }

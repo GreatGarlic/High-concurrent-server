@@ -5,9 +5,7 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 import org.server.log.appender.disruptor.LogDisruptorEventHandle;
-import org.server.log.appender.disruptor.LogProducerTranslator;
 import org.server.log.appender.disruptor.LogValueEvent;
-import org.server.log.appender.disruptor.model.LogPublishMessageEntity;
 
 import ch.qos.logback.core.Appender;
 import ch.qos.logback.core.UnsynchronizedAppenderBase;
@@ -102,13 +100,9 @@ public class DisruptorLogAppenderBase<E> extends UnsynchronizedAppenderBase<E>
 		preprocess(eventObject);
 		put(eventObject);
 	}
-
-	private void put(E eventObject) {
-		LogPublishMessageEntity<E> entity = new LogPublishMessageEntity<E>(
-				eventObject, aai);
-		ringBuffer.publishEvent(LogProducerTranslator.TRANSLATOR, entity);
+	
+	protected void put(E eventObject) {
 	}
-
 	public int getQueueSize() {
 		return queueSize;
 	}
