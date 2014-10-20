@@ -120,16 +120,10 @@ public class DisruptorLogAppenderBase<E> extends UnsynchronizedAppenderBase<E>
 	}
 
 	public void addAppender(Appender<E> newAppender) {
-		if (appenderCount == 0) {
 			appenderCount++;
 			addInfo("Attaching appender named [" + newAppender.getName()
 					+ "] to DisruptorLogAppender.");
 			aai.addAppender(newAppender);
-		} else {
-			addWarn("One and only one appender may be attached to AsyncAppender.");
-			addWarn("Ignoring additional appender named ["
-					+ newAppender.getName() + "]");
-		}
 	}
 
 	public Iterator<Appender<E>> iteratorForAppenders() {

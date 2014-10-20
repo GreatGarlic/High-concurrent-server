@@ -79,31 +79,19 @@
 	<!-- <logger name="java.sql.Statement" level="error" /> -->
 	<!-- <logger name="java.sql.ResultSet" level="error" /> -->
 	<!-- <logger name="java.sql.Connection" level="error" /> -->
-	<!--编解码器日志级别 -->
-	<logger name="org.server.netty.codec" level="INFO">
-		<appender-ref ref="CODEC" />
-	</logger>
+
 	<!--异步输出 -->
-	<!-- <appender name="ASYNCCONSOLE" class="org.server.log.appender.DisruptorLogAppender"> -->
-	<!-- <queueSize>1024</queueSize> -->
-	<!-- <discardingThreshold>0</discardingThreshold> -->
-	<!-- <appender-ref ref="CONSOLE" /> -->
-	<!-- </appender> -->
 	<appender name="ASYNCFILE" class="org.server.log.appender.DisruptorLogAppender">
 		<queueSize>1024</queueSize>
 		<discardingThreshold>0</discardingThreshold>
+		<appender-ref ref="CONSOLE" />
 		<appender-ref ref="FILE" />
+		<appender-ref ref="CODEC" />
+		<appender-ref ref="ERRORFILE" />
 	</appender>
-	<!-- <appender name="ASYNCERRORFILE" class="org.server.log.appender.DisruptorLogAppender"> -->
-	<!-- <queueSize>1024</queueSize> -->
-	<!-- <discardingThreshold>0</discardingThreshold> -->
-	<!-- <appender-ref ref="ERRORFILE" /> -->
-	<!-- </appender> -->
-	<!-- <appender name="ASYNCCODEC" class="org.server.log.appender.DisruptorLogAppender"> -->
-	<!-- <queueSize>1024</queueSize> -->
-	<!-- <discardingThreshold>0</discardingThreshold> -->
-	<!-- <appender-ref ref="CODEC" /> -->
-	<!-- </appender> -->
+<!-- 	 <logger name="org.server.netty.codec" level="INFO"> -->
+<!--         <appender-ref ref="CODEC" /> -->
+<!--     </logger> -->
 	<!--UDP日志传输 -->
 	<!-- <appender name="SYSLOG" class="ch.qos.logback.classic.net.SyslogAppender"> -->
 	<!-- <syslogHost>192.168.26.23</syslogHost> -->
@@ -115,13 +103,7 @@
 
 
 	<root level="DEBUG">
-		<!-- <appender-ref ref="ASYNCCONSOLE" /> -->
-		<appender-ref ref="CONSOLE" />
 		<appender-ref ref="ASYNCFILE" />
-		<!-- <appender-ref ref="ASYNCERRORFILE" /> -->
-		<appender-ref ref="ERRORFILE" />
-		<!-- <appender-ref ref="ASYNCCODEC" /> -->
-		<appender-ref ref="CODEC" />
 	</root>
 
 </configuration>  
