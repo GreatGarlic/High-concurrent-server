@@ -13,6 +13,7 @@ import ch.qos.logback.core.spi.AppenderAttachable;
 import ch.qos.logback.core.spi.AppenderAttachableImpl;
 
 import com.lmax.disruptor.RingBuffer;
+import com.lmax.disruptor.SleepingWaitStrategy;
 import com.lmax.disruptor.YieldingWaitStrategy;
 import com.lmax.disruptor.dsl.Disruptor;
 import com.lmax.disruptor.dsl.ProducerType;
@@ -78,7 +79,7 @@ public class DisruptorLogAppenderBase<E> extends UnsynchronizedAppenderBase<E>
 		Executor executor = Executors.newCachedThreadPool();
 		Disruptor<LogValueEvent> disruptor = new Disruptor<LogValueEvent>(
 				LogValueEvent.EVENT_FACTORY, queueSize, executor,
-				ProducerType.MULTI, new YieldingWaitStrategy());
+				ProducerType.MULTI, new SleepingWaitStrategy());
 		disruptor.handleEventsWith(new LogDisruptorEventHandle());
 		disruptor.start();
 		ringBuffer = disruptor.getRingBuffer();
