@@ -26,7 +26,7 @@
 			<artifactId>javassist</artifactId>
 			<version>3.18.2-GA</version>
 		</dependency>
-		<!--Disruptor高并发业务处理框架 -->
+		<!--Disruptor内存无锁消息队列框架 -->
 		<dependency>
 			<groupId>com.lmax</groupId>
 			<artifactId>disruptor</artifactId>
