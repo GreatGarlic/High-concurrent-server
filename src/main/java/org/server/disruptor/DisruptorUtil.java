@@ -16,6 +16,7 @@ import com.lmax.disruptor.dsl.ProducerType;
  * @author 创建者:刘源
  */
 
+@SuppressWarnings("unchecked")
 public class DisruptorUtil {
 
 	public DisruptorUtil() {

@@ -64,6 +64,7 @@ public class DisruptorLogAppenderBase<E> extends UnsynchronizedAppenderBase<E>
 	protected void preprocess(E eventObject) {
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void start() {
 		if (appenderCount == 0) {
