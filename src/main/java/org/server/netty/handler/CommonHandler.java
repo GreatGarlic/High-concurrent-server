@@ -2,7 +2,6 @@ package org.server.netty.handler;
 
 import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelPromise;
 import io.netty.util.AttributeKey;
 
 import org.slf4j.Logger;

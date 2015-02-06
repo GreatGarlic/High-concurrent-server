@@ -15,22 +15,11 @@ package org.server.netty;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
-
-import io.netty.handler.traffic.ChannelTrafficShapingHandler;
-import io.netty.handler.traffic.GlobalTrafficShapingHandler;
-import io.netty.util.HashedWheelTimer;
 import io.netty.util.concurrent.DefaultEventExecutorGroup;
-import io.netty.util.concurrent.EventExecutorGroup;
+
 import org.server.netty.codec.MessageDecoder;
 import org.server.netty.codec.MessageEncoder;
-import org.server.netty.handler.ChannelTrafficCounterHandler;
 import org.server.netty.handler.CommonHandler;
-import org.server.netty.handler.GlobalTrafficCounterHandler;
-
-import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
 
 /**
  *装载Netty处理链路.
@@ -38,23 +27,17 @@ import java.util.concurrent.ScheduledExecutorService;
  */
 
 public class InitializerPipeline extends ChannelInitializer<SocketChannel> {
-    private GlobalTrafficCounterHandler counter;
-    private EventExecutorGroup eventExecutorGroup;
 	public InitializerPipeline() {
-        ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
-        counter = new GlobalTrafficCounterHandler(executor, 1000);
-        eventExecutorGroup = new DefaultEventExecutorGroup(32);
+   
 	}
 
 	@Override
 	protected void initChannel(SocketChannel ch) throws Exception {
-        ChannelTrafficCounterHandler trafficCounterHandler = new ChannelTrafficCounterHandler(50);
-
+		//使用Netty实现的线程池
+        DefaultEventExecutorGroup e1=new DefaultEventExecutorGroup(16);
 		ChannelPipeline pipeline = ch.pipeline();
 		pipeline.addLast("decoder", new MessageDecoder());
-        //pipeline.addLast("trafficCounter", trafficCounterHandler);
-        pipeline.addLast("globalCounter", counter);
         pipeline.addLast("encoder", new MessageEncoder());
-		pipeline.addLast("handler", new CommonHandler());
+		pipeline.addLast(e1,"handler", new CommonHandler());
 	}
 }
