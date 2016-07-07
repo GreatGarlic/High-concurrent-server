@@ -33,35 +33,41 @@ public class Client {
 	private int port;
 
 	public Bootstrap createBootstrap(Bootstrap bootstrap, EventLoopGroup eventLoop) {
+		try {
 
-		if (bootstrap != null) {
-			bootstrap.group(eventLoop);
-			bootstrap.channel(NioSocketChannel.class);
-			bootstrap.option(ChannelOption.SO_KEEPALIVE, true);
-			bootstrap.handler(new ChannelInitializer<SocketChannel>() {
-				@Override
-				protected void initChannel(SocketChannel socketChannel) throws Exception {
-					socketChannel.pipeline().addLast(new ClientHandler(Client.this));
-				}
-			});
-			bootstrap.remoteAddress(host, port);
-			channelFuture = bootstrap.connect();
-			channelFuture.addListener(new ChannelFutureListener() {
-				@Override
-				public void operationComplete(ChannelFuture future) throws Exception {
-					if (!future.isSuccess()) {
-						System.out.println("Reconnect");
-						final EventLoop loop = future.channel().eventLoop();
-						loop.schedule(new Runnable() {
-							@Override
-							public void run() {
-								Client.this.createBootstrap(new Bootstrap(), loop);
-							}
-						}, 1L, TimeUnit.SECONDS);
+			if (bootstrap != null) {
+				bootstrap.group(eventLoop);
+				bootstrap.channel(NioSocketChannel.class);
+				bootstrap.option(ChannelOption.SO_KEEPALIVE, true);
+				bootstrap.handler(new ChannelInitializer<SocketChannel>() {
+					@Override
+					protected void initChannel(SocketChannel socketChannel) throws Exception {
+						socketChannel.pipeline().addLast(new ClientHandler(Client.this));
 					}
-				}
-			});
+				});
+				bootstrap.remoteAddress(host, port);
+				channelFuture = bootstrap.connect();
+				channelFuture.addListener(new ChannelFutureListener() {
+					@Override
+					public void operationComplete(ChannelFuture future) throws Exception {
+						if (!future.isSuccess()) {
+							System.out.println("Reconnect");
+							final EventLoop loop = future.channel().eventLoop();
+							loop.schedule(new Runnable() {
+								@Override
+								public void run() {
+									Client.this.createBootstrap(new Bootstrap(), loop);
+								}
+							}, 1L, TimeUnit.SECONDS);
+						}
+					}
+				});
+
+			}
+		} catch (Exception e) {
+
 		}
+
 		return bootstrap;
 	}
 
