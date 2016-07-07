@@ -5,6 +5,7 @@
 	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
 		<Target>System.out</Target>
 		<encoder>
+			<charset>utf-8</charset>
 			<pattern>%d-%c-%t-%5p: %m%n</pattern>
 		</encoder>
 	</appender>
@@ -12,7 +13,6 @@
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<File>log/all.log</File>
 		<Append>true</Append>
-		<Encoding>UTF-8</Encoding>
 		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
 			<level>ALL</level>
 		</filter>
@@ -25,6 +25,7 @@
 			</timeBasedFileNamingAndTriggeringPolicy>
 		</rollingPolicy>
 		<encoder>
+			<charset>utf-8</charset>
 			<pattern>%d-%c-%t-%5p: %m%n</pattern>
 		</encoder>
 	</appender>
@@ -32,8 +33,8 @@
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<Append>true</Append>
 		<File>log/error/error.log</File>
-		<Encoding>UTF-8</Encoding>
 		<encoder>
+			<charset>utf-8</charset>
 			<pattern>%d-%c-%t-%5p: %m%n</pattern>
 		</encoder>
 		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
@@ -53,8 +54,8 @@
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<Append>true</Append>
 		<File>log/data/codec.log</File>
-		<Encoding>UTF-8</Encoding>
 		<encoder>
+			<charset>utf-8</charset>
 			<pattern>%d-%c-%t-%5p: %m%n</pattern>
 		</encoder>
 		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
