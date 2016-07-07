@@ -15,9 +15,10 @@ package org.server.netty;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
+import io.netty.handler.codec.LineBasedFrameDecoder;
+import io.netty.handler.codec.string.StringDecoder;
 import io.netty.util.concurrent.DefaultEventExecutorGroup;
 
-import org.server.netty.codec.MessageDecoder;
 import org.server.netty.codec.MessageEncoder;
 import org.server.netty.handler.CommonHandler;
 
@@ -34,10 +35,12 @@ public class InitializerPipeline extends ChannelInitializer<SocketChannel> {
 	@Override
 	protected void initChannel(SocketChannel ch) throws Exception {
 		//使用Netty实现的线程池
-        DefaultEventExecutorGroup e1=new DefaultEventExecutorGroup(16);
+//        DefaultEventExecutorGroup e1=new DefaultEventExecutorGroup(16);
 		ChannelPipeline pipeline = ch.pipeline();
-		pipeline.addLast("decoder", new MessageDecoder());
+//		pipeline.addLast("decoder", new MessageDecoder());
+		pipeline.addLast("decoder", new LineBasedFrameDecoder(2048));
+		pipeline.addLast(new StringDecoder());
         pipeline.addLast("encoder", new MessageEncoder());
-		pipeline.addLast(e1,"handler", new CommonHandler());
+		pipeline.addLast("handler", new CommonHandler());
 	}
 }
