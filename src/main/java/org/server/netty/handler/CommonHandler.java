@@ -1,8 +1,7 @@
 package org.server.netty.handler;
 
-import io.netty.buffer.ByteBuf;
-import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.util.AttributeKey;
 
 import org.slf4j.Logger;
@@ -14,7 +13,7 @@ import org.slf4j.LoggerFactory;
  * @author 刘源
  */
 
-public class CommonHandler extends ChannelHandlerAdapter {
+public class CommonHandler extends SimpleChannelInboundHandler<Object> {
 	/**
 	 * 日志组件.
 	 */
@@ -38,7 +37,7 @@ public class CommonHandler extends ChannelHandlerAdapter {
 	}
 
 	@Override
-	public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+	public void channelRead0(ChannelHandlerContext ctx, Object msg) throws Exception {
 		// PublishMessageEntity entity = new PublishMessageEntity(ctx, msg);
 		System.out.println((String) msg);
 		byte[] aaa = { 0x12, 0x23 };
