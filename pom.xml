@@ -18,7 +18,7 @@
 		<dependency>
 			<groupId>io.netty</groupId>
 			<artifactId>netty-all</artifactId>
-			<version>4.1.5.Final</version>
+			<version>[4.1,4.9)</version>
 		</dependency>
 		<!-- 分析、编辑和创建Java字节码的类库(Netty辅助依赖) -->
 		<dependency>
