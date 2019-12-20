@@ -2,8 +2,8 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>High-concurrent-server</groupId>
-	<artifactId>High-concurrent-server</artifactId>
+	<groupId>org.high-concurrent-server</groupId>
+	<artifactId>high-concurrent-server</artifactId>
 	<version>1.0</version>
 	<packaging>jar</packaging>
 
