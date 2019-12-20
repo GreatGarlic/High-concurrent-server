@@ -8,7 +8,7 @@
     <packaging>jar</packaging>
 
     <name>High-concurrent-server</name>
-
+    <url>https://github.com/GreatGarlic/High-concurrent-server</url>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
@@ -219,6 +219,25 @@
                 </configuration>
             </plugin>
 
+            <!-- doc plugin,Maven API文档生成插件 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <additionalOptions>
+                        <additionalOption>-Xdoclint:none</additionalOption>
+                    </additionalOptions>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
             <!-- 要将源码上传到Nexus，需要加入这个插件 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
