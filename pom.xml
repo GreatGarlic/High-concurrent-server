@@ -9,6 +9,8 @@
 
     <name>High-concurrent-server</name>
     <url>https://github.com/GreatGarlic/High-concurrent-server</url>
+    <description>The main core idea is to replace java.util.concurrent.ArrayBlockingQueue in Logback's AsyncAppenderBase with the Disruptor inter-thread communication library.</description>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
@@ -232,6 +234,7 @@
                 <executions>
                     <execution>
                         <id>attach-javadocs</id>
+                        <phase>package</phase>
                         <goals>
                             <goal>jar</goal>
                         </goals>
