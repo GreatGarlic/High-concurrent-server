@@ -28,7 +28,7 @@ PS:由于Netty官方废弃5.0,现在一律使用4.1.X
 </dependency>
 ```
 
-## Gradle
+### Gradle
 
 ``` Gradle
 compile 'io.github.greatgarlic:high-concurrent-server:1.0'
