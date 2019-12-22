@@ -32,6 +32,27 @@ PS:由于Netty官方废弃5.0,现在一律使用4.1.X
 compile 'io.github.greatgarlic:high-concurrent-server:1.0'
 ```
 
+## 使用
+
+将配置加入工程的```logback.xml```文件中
+
+``` xml
+<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+    <Target>System.out</Target>
+    <encoder>
+    <charset>utf-8</charset>
+        <pattern>%d-%c-%t-%5p: %m%n</pattern>
+    </encoder>
+</appender>
+<!--异步输出 -->
+<appender name="ASYNCFILE"class="org.server.log.appender.DisruptorLogAppender">
+    <queueSize>1024</queueSize>
+    <discardingThreshold>0</discardingThreshold>
+    <appender-ref ref="CONSOLE" />
+</appender>
+```
+
+
 ## 我的
 
 QQ号：405653510
