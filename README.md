@@ -1,4 +1,5 @@
 # High-concurrent-server [![Build Status](https://travis-ci.org/GreatGarlic/High-concurrent-server.svg?branch=master)](https://travis-ci.org/GreatGarlic/High-concurrent-server)
+[maven](https://maven-badges.herokuapp.com/maven-central/io.github.greatgarlic/High-concurrent-server/badge.svg)](https://search.maven.org/search?q=High-concurrent-server)
 
 基于Netty4.1.x+Disruptor3.x实现的高性能通信服务器架构
 
